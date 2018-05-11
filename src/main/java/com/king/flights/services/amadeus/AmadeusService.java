@@ -3,12 +3,11 @@ package com.king.flights.services.amadeus;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.king.flights.models.Currency;
@@ -21,20 +20,24 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+@Service
 public class AmadeusService implements FlightsSeachService {
 	
-	@Value("${amadeus.api.key}")
+	@Value("${amadues.api.key}")
 	private String apiKey;
 	
 	@Value("${amadeus.api.url}")
 	private String apiUrl;
+	
+	@Autowired
+	private OkHttpClient httpClient;
 	
 	private static final String DATE_FORMAT = "yyyy-MM-dd";
 	
 	public List<FlightInfo> findFlights(String fromAirport, String toAirport, Date departureDate, Date returnDate, int adults, int children, int infants, Currency currency) throws IOException {
 		DateFormat df = new SimpleDateFormat(DATE_FORMAT);
 		
-		OkHttpClient client = new OkHttpClient();
+		httpClient = new OkHttpClient();
 		HttpUrl url = new HttpUrl.Builder()
 				.addQueryParameter("apikey", apiKey)
 				.addQueryParameter("origin", fromAirport)
@@ -45,7 +48,7 @@ public class AmadeusService implements FlightsSeachService {
 		Request request = new Request.Builder()
 				.url(url)
 				.build();
-		Response response = client.newCall(request).execute();
+		Response response = httpClient.newCall(request).execute();
 		ObjectMapper mapper = new ObjectMapper();
 		FlightResponse flightResponse = mapper.readValue(response.body().toString(), FlightResponse.class);
 		
@@ -55,7 +58,7 @@ public class AmadeusService implements FlightsSeachService {
 	public List<FlightInfo> findFlights(FlightQuery flightQuery) throws IOException {
 		DateFormat df = new SimpleDateFormat(DATE_FORMAT);
 		
-		OkHttpClient client = new OkHttpClient();
+		httpClient = new OkHttpClient();
 		HttpUrl url = new HttpUrl.Builder()
 				.addQueryParameter("apikey", apiKey)
 				.addQueryParameter("origin", flightQuery.getOrigin())
@@ -66,7 +69,7 @@ public class AmadeusService implements FlightsSeachService {
 		Request request = new Request.Builder()
 				.url(url)
 				.build();
-		Response response = client.newCall(request).execute();
+		Response response = httpClient.newCall(request).execute();
 		
 		ObjectMapper mapper = new ObjectMapper();
 		FlightResponse flightResponse = mapper.readValue(response.body().toString(), FlightResponse.class);
