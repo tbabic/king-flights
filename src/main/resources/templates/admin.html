@@ -12,8 +12,14 @@
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<div>
+
+	<div id="admin-login-id">
+		<div th:replace="adminLogin :: fragment"></div>
+	</div>
+	<div id="admin-airports-id" style="display:none">
+		<div th:replace="adminAirports :: fragment" ></div>
 	</div>
 	
 </body>
+
 </html>

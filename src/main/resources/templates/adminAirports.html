@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Bootstrap Example</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div th:fragment="fragment" class="container">
+		<nav th:replace="header :: navbar"></nav>
+		<div class="page-header">
+			<h1>Admin airports</h1>
+		</div>
+		
+		<form id="admin-airport-form">
+			
+			<div class="row">
+				<div class="col-sm-2">IATA code:</div>
+				<div class="col-sm-2"><input name="iataCode"/></div>
+			</div>
+			<div class="row">
+				<div class="col-sm-2">Name:</div>
+				<div class="col-sm-2"><input name="name"/></div>
+			</div>
+			
+			<div class="row">
+				<div id="airport-error-id" class="col-sm-12 error"></div>
+			</div>
+			
+			<button id="add-airport-btn" class="btn btn-primary">Add airport</button>
+			
+			<div class="row">
+				<div id="airport-error-id" class="col-sm-12 error"></div>
+			</div>
+			
+		</form>
+		
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>Iata Code</th>
+					<th>Airport Name</th>
+				</tr>
+			</thead>
+			<tbody id="table-body-id">
+			</tbody>
+		</table>
+		
+		
+		
+
+		<script src="js/adminAirportsController.js" ></script>
+	</div>
+	
+</body>
+
+
+</html>

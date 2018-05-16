@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="header :: header">
+</head>
+<body>
+	<div class="container">
+		<nav th:replace="header :: navbar"></nav>
+		<div class="page-header">
+			<h1>Search flights</h1>
+		</div>
+		<form id="flights-params-id" action="/flights", method="post">
+			<div class="row">
+				<div class="col-sm-1">
+					Origin:
+				</div>
+				<div class="col-sm-3">
+					<select class="airport-dropdown" name="origin">
+						
+					</select>
+				</div>
+				<div class="col-sm-1">
+					Destination:
+				</div>
+				<div class="col-sm-3">
+					<select class="airport-dropdown" name="destination">
+					</select>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-1">Departure:</div>
+				<div class="col-sm-3"><input name="departureDate" type="date"/></div>
+
+				<div class="col-sm-1">Return?:</div>
+				<div class="col-sm-3"><input name="returnDate" type="date"/></div>
+			</div>
+			<div class="row">
+				<div class="col-sm-1">Adults:</div>
+				<div class="col-sm-3"><input name="adults" type="number"/></div>
+				<div class="col-sm-1">Children:</div>
+				<div class="col-sm-3"><input name="children" type="number"/></div>
+				<div class="col-sm-1">Infants:</div>
+				<div class="col-sm-3"><input name="infants" type="number"/></div>
+			</div>
+			<div class="row">
+				<div class="col-sm-1">Currency:</div>
+				<div class="col-sm-3">
+					<select name="currency">
+						<option value="USD">USD</option>
+						<option value="EUR">EUR</option>
+						<option value="HRK">HRK</option>
+					</select>
+				</div>
+			</div>
+		</form>
+		
+		<div class="row">
+			<div id="error-id" class="col-sm-12 error"></div>
+		</div>
+		
+		<button id="search-flights-btn" class="btn btn-primary">Search</button>
+
+		<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th>Origin</th>
+				<th>Destination</th>
+				<th>Departure</th>
+				<th>Departure stops</th>
+				<th>Return</th>
+				<th>Return stops</th>
+				<th>Price</th>
+			</tr>
+		</thead>
+		<tbody id="table-body-id">
+		</tbody>
+	</table>
+		
+		
+	</div>
+</body>
+
+<script src="js/flightSearchController.js" ></script>
+<script>
+
+</script>
+</html>

@@ -1,31 +1,29 @@
 package com.king.flights.controllers;
 
+import java.io.IOException;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
-
-import com.king.flights.repositories.AirportRepository;
+import com.king.flights.models.FlightInfo;
+import com.king.flights.models.FlightQuery;
+import com.king.flights.services.FlightsSeachService;
 
 
 @RestController
+@RequestMapping("/flights")
 public class FlightController {
 
 	@Autowired
-	private AirportRepository airportRepository;
+	private FlightsSeachService flightSearchService;
 	
-	@RequestMapping(path={"/", "/index"}, method=RequestMethod.GET)
-	public ModelAndView getIndex() {
-		ModelAndView mav = new ModelAndView("index.html");
-		mav.addObject("airports", airportRepository.findAll());
-		return mav;
+	@RequestMapping(method=RequestMethod.GET)
+	public List<FlightInfo> searchFlights(FlightQuery flightQuery) throws IOException {
+		flightQuery.validate();
+		return flightSearchService.findFlights(flightQuery);
 	}
 	
-	@RequestMapping(path={"/flights"}, method=RequestMethod.POST)
-	public String search() {
-		return "index.html";
-	}
 	
 }
