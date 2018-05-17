@@ -55,7 +55,7 @@ var addAirport = function(isRetry) {
 					addAirport(true);
 				});
 			} else {
-				$("#airport-error-id").text("Error has occured");
+				$("#airport-error-id").text(err1.responseText);;
 			}
 			
 			
