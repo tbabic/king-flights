@@ -43,10 +43,17 @@ public class Airport {
 	
 	public void validate() {
 		if (StringUtils.isEmpty(iataCode)) {
-			throw new ValidationException("IATA code must be three characters");
+			throw new ValidationException("IATA code must be three uppercase characters");
 		}
+		
 		if (iataCode.length() != 3) {
-			throw new ValidationException("IATA code must be three characters");
+			throw new ValidationException("IATA code must be three uppercase characters");
+		}
+		if (!iataCode.equals(iataCode.toUpperCase())) {
+			throw new ValidationException("IATA code must be three uppercase characters");
+		}
+		if (StringUtils.isEmpty(name)) {
+			throw new ValidationException("Airport name must not be empty");
 		}
 	}
 	

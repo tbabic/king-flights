@@ -25,6 +25,7 @@ public class AirportController {
 	
 	@RequestMapping(method=RequestMethod.POST)
 	public void addAirport(@RequestBody Airport airport) {
+		airport.validate();
 		airportRepository.save(airport);
 	}
 }
